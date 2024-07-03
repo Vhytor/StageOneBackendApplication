@@ -96,4 +96,18 @@ public class StageOneServiceImpl implements StageOneService{
     public String getGreeting(String visitorName, int temperature, String location) {
         return String.format("Hello, %s!, the temperature is %d degrees Celsius in %s", visitorName, temperature, location);
     }
+    @Override
+    public String getExternalIp(){
+        RestTemplate restTemplate = new RestTemplate();
+        String apiUrl = "https://api.ipify.org?format=json";
+        try {
+            Map<String, String> response = restTemplate.getForObject(apiUrl, Map.class);
+            logger.info("External IP API Response: " + response);
+            return response != null ? response.get("ip") : "127.0.0.1";
+        } catch (Exception e) {
+            logger.severe("Error fetching external IP: " + e.getMessage());
+            return "127.0.0.1";
+        }
+
+    }
 }

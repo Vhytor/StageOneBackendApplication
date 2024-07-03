@@ -36,8 +36,8 @@ public class StageOneController {
 //        if (clientIp.equals("0:0:0:0:0:0:0:1")) {
 //            clientIp = "127.0.0.1";
 //        }
-        if (clientIp == null || clientIp.isEmpty()) {
-            clientIp = "127.0.0.1";
+        if (clientIp == null || clientIp.isEmpty() || clientIp.equals("127.0.0.1") || clientIp.equals("0:0:0:0:0:0:0:1")) {
+            clientIp = stageOneService.getExternalIp();
         }
 
         String location = stageOneService.getLocation(clientIp);
@@ -50,6 +50,13 @@ public class StageOneController {
         response.put("greeting", greeting);
 
         return response;
+    }
+    private String getClientIp(HttpServletRequest httpServletRequest){
+        String clientIp = httpServletRequest.getHeader("X-Forwarded-For");
+        if (clientIp == null || clientIp.isEmpty() || "unknown".equalsIgnoreCase(clientIp)){
+            clientIp = httpServletRequest.getRemoteAddr();
+        }
+        return clientIp;
     }
 
 }

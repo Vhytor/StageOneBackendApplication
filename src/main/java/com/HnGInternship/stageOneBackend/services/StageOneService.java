@@ -9,5 +9,6 @@ public interface StageOneService {
     String getLocation(String clientIp);
     int getTemperature(String location);
     String getGreeting(String visitorName, int temperature, String location);
+    String getExternalIp();
 
 }
