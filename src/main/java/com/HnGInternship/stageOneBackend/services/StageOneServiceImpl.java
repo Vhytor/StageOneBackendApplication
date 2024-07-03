@@ -66,6 +66,10 @@ public class StageOneServiceImpl implements StageOneService{
             return "Unknown";
         }
     }
+    @Override
+    public String getGreeting(String visitorName, int temperature, String location) {
+        return String.format("Hello, %s!, the temperature is %d degrees Celsius in %s", visitorName, temperature, location);
+    }
 
     @Override
     public int getTemperature(String location) {
@@ -92,10 +96,7 @@ public class StageOneServiceImpl implements StageOneService{
         }
     }
 
-    @Override
-    public String getGreeting(String visitorName, int temperature, String location) {
-        return String.format("Hello, %s!, the temperature is %d degrees Celsius in %s", visitorName, temperature, location);
-    }
+
     @Override
     public String getExternalIp(){
         RestTemplate restTemplate = new RestTemplate();

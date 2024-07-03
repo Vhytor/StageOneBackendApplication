@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RestController
@@ -44,7 +45,7 @@ public class StageOneController {
         int temperature = stageOneService.getTemperature(location);
         String greeting = stageOneService.getGreeting(visitor_name, temperature, location);
 
-        Map<String, Object> response = new HashMap<>();
+        Map<String, Object> response = new LinkedHashMap<>();
         response.put("client_ip", clientIp);
         response.put("location", location);
         response.put("greeting", greeting);
